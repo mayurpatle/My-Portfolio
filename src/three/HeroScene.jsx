@@ -24,8 +24,10 @@ function Crystal({ mouse }) {
   });
 
   return (
-    <Float speed={1.2} rotationIntensity={0.3} floatIntensity={0.8}>
-      <mesh ref={meshRef} scale={1.6}>
+    // speed for the centre ball 
+    // default  speed  1.2 rotation intensity 0.3 floatintentsity 0.8
+    <Float speed={5} rotationIntensity={0.5} floatIntensity={1.5}>
+      <mesh ref={meshRef} scale={1.0}>
         <icosahedronGeometry args={[1, 12]} />
         <MeshDistortMaterial
           color="#0a0b12"
@@ -55,7 +57,7 @@ function Crystal({ mouse }) {
 /** Subtle particle field for atmosphere */
 function ParticleField() {
   const ref = useRef();
-  const count = 800;
+  const count = 900;
   const positions = useMemo(() => {
     const arr = new Float32Array(count * 3);
     for (let i = 0; i < count; i++) {

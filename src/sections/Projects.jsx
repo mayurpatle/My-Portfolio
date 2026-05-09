@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
 import Reveal from "../components/Reveal";
- 
+
 const PROJECTS = [
   {
     n: "01",
@@ -54,29 +54,25 @@ const PROJECTS = [
     href: "https://github.com/mayurpatle",
   },
 ];
- 
+
 const accentMap = {
   cyan:   { glow: "shadow-neon-cyan", text: "text-neon-cyan",   chip: "bg-neon-cyan/10 text-neon-cyan border-neon-cyan/30" },
   violet: { glow: "shadow-neon-vio",  text: "text-neon-violet", chip: "bg-neon-violet/10 text-neon-violet border-neon-violet/30" },
   amber:  { glow: "shadow-neon-cyan", text: "text-neon-amber",  chip: "bg-neon-amber/10 text-neon-amber border-neon-amber/30" },
   rose:   { glow: "shadow-neon-vio",  text: "text-neon-rose",   chip: "bg-neon-rose/10 text-neon-rose border-neon-rose/30" },
 };
- 
+
 function ProjectCard({ p, index, progress }) {
   const cardRef = useRef(null);
   const rx = useMotionValue(0);
   const ry = useMotionValue(0);
   const sx = useSpring(rx, { stiffness: 200, damping: 18 });
   const sy = useSpring(ry, { stiffness: 200, damping: 18 });
- 
-  // Each card "owns" a slice of the scroll progress.
-  // When progress is on this card's slice, it scales up and brightens.
+
   const total = PROJECTS.length;
   const slice = 1 / total;
   const center = (index + 0.5) * slice;
- 
-  // Distance from this card's center → 0 when focused, increases as you scroll past.
-  // Scale: 1.0 when centered, 0.88 when away. Opacity dims slightly.
+
   const scale = useTransform(
     progress,
     [center - slice, center, center + slice],
@@ -87,7 +83,7 @@ function ProjectCard({ p, index, progress }) {
     [center - slice, center, center + slice],
     [0.55, 1.0, 0.55]
   );
- 
+
   const onMove = (e) => {
     const el = cardRef.current;
     if (!el) return;
@@ -98,9 +94,9 @@ function ProjectCard({ p, index, progress }) {
     rx.set(-(py - 0.5) * 10);
   };
   const onLeave = () => { rx.set(0); ry.set(0); };
- 
+
   const a = accentMap[p.accent];
- 
+
   return (
     <motion.a
       href={p.href}
@@ -120,8 +116,10 @@ function ProjectCard({ p, index, progress }) {
       }}
       className="group relative block w-[460px] shrink-0"
     >
+      {/* CARD HEIGHT — fluid: tries 560px but caps at 62vh so progress bar always fits */}
       <div
-        className={`glass relative h-[560px] overflow-hidden rounded-3xl p-8 transition-all duration-700 ease-apple group-hover:border-white/20 group-hover:${a.glow}`}
+        className={`glass relative overflow-hidden rounded-3xl p-7 transition-all duration-700 ease-apple group-hover:border-white/20 group-hover:${a.glow}`}
+        style={{ height: "min(560px, 62vh)" }}
       >
         {/* Number watermark */}
         <div
@@ -130,7 +128,7 @@ function ProjectCard({ p, index, progress }) {
         >
           {p.n}
         </div>
- 
+
         {/* Glow blob */}
         <div
           className={`pointer-events-none absolute -bottom-32 -left-20 h-72 w-72 rounded-full opacity-0 blur-3xl transition-opacity duration-700 group-hover:opacity-40 ${
@@ -139,10 +137,10 @@ function ProjectCard({ p, index, progress }) {
             p.accent === "amber"  ? "bg-neon-amber"  : "bg-neon-rose"
           }`}
         />
- 
+
         <div className="relative flex h-full flex-col justify-between" style={{ transform: "translateZ(30px)" }}>
           <div>
-            <div className="mb-6 flex items-center justify-between">
+            <div className="mb-5 flex items-center justify-between">
               <span className={`font-mono text-xs tracking-widest ${a.text}`}>
                 {p.n} / {String(PROJECTS.length).padStart(2, "0")}
               </span>
@@ -150,16 +148,16 @@ function ProjectCard({ p, index, progress }) {
                 {p.tag}
               </span>
             </div>
- 
+
             <h3 className="font-display text-4xl leading-tight tracking-tight md:text-5xl">
               {p.title}
             </h3>
- 
-            <p className="mt-6 text-sm leading-relaxed text-white/65">{p.blurb}</p>
+
+            <p className="mt-5 text-sm leading-relaxed text-white/65">{p.blurb}</p>
           </div>
- 
+
           <div>
-            <div className="mb-6 flex flex-wrap gap-2">
+            <div className="mb-5 flex flex-wrap gap-2">
               {p.stack.map((s) => (
                 <span
                   key={s}
@@ -169,8 +167,8 @@ function ProjectCard({ p, index, progress }) {
                 </span>
               ))}
             </div>
- 
-            <div className="flex items-center justify-between border-t border-white/10 pt-5 text-xs font-mono">
+
+            <div className="flex items-center justify-between border-t border-white/10 pt-4 text-xs font-mono">
               <span className="text-white/50">view case study</span>
               <span className="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 transition-all group-hover:border-white group-hover:bg-white group-hover:text-ink-950">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
@@ -184,44 +182,28 @@ function ProjectCard({ p, index, progress }) {
     </motion.a>
   );
 }
- 
+
 export default function Projects() {
   const containerRef = useRef(null);
- 
-  // Track scroll across the WHOLE pinned section.
-  // 'start start' = section top hits viewport top. 'end end' = section bottom hits viewport bottom.
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"],
   });
- 
-  // CARD MATH:
-  // Each card is 460px wide + 32px gap = 492px stride.
-  // Total strip width = 5 cards × 492px - last gap = 2428px.
-  // We want card N centered → translateX = -(N × 492px) + (viewportCenter - cardWidth/2)
-  // Easier: express as percentages of strip width.
-  //
-  // At progress 0   → card 1 centered  → x = "calc(50vw - 230px)"            (no shift)
-  // At progress 1   → card 5 centered  → x = "calc(50vw - 230px - 4×492px)"  (shift left 4 strides)
-  //
-  // So we go from 0 to -(4 × 492px) = -1968px.
+
   const x = useTransform(scrollYProgress, [0, 1], [0, -1968]);
- 
+
   return (
-    // OUTER wrapper is TALL — its height controls how much vertical scroll
-    // gets converted to horizontal movement. Taller = more cards or slower pace.
-    // 5 cards × 100vh = 500vh of vertical scroll for the pinned section.
     <section
       ref={containerRef}
       id="projects"
       className="relative"
       style={{ height: "500vh" }}
     >
-      {/* INNER is sticky — pinned to viewport for the whole tall outer scroll */}
       <div className="sticky top-0 flex h-screen flex-col overflow-hidden">
- 
-        {/* Section header */}
-        <div className="mx-auto w-full max-w-7xl px-6 pt-28 lg:px-12">
+
+        {/* SECTION HEADER — tighter top padding so cards + bar fit at 100% zoom */}
+        <div className="mx-auto w-full max-w-7xl px-6 pt-20 lg:px-12">
           <Reveal>
             <p className="font-mono text-xs uppercase tracking-[0.3em] text-white/40">
               [ 02 / Selected Work ]
@@ -234,14 +216,12 @@ export default function Projects() {
             </h2>
           </Reveal>
         </div>
- 
-        {/* Centered horizontal track */}
+
+        {/* HORIZONTAL TRACK */}
         <div className="relative flex flex-1 items-center">
           <motion.div
             style={{
               x,
-              // Padding on the left pushes card 01 into the viewport center at progress 0.
-              // calc(50vw - 230px) = half the viewport minus half a card.
               paddingLeft: "calc(50vw - 230px)",
               paddingRight: "calc(50vw - 230px)",
             }}
@@ -252,9 +232,9 @@ export default function Projects() {
             ))}
           </motion.div>
         </div>
- 
-        {/* Progress bar at the bottom — shows which card you're on */}
-        <div className="mx-auto w-full max-w-7xl px-6 pb-10 lg:px-12">
+
+        {/* PROGRESS BAR — tighter bottom padding */}
+        <div className="mx-auto w-full max-w-7xl px-6 pb-6 lg:px-12">
           <div className="flex items-center gap-3 font-mono text-xs text-white/40">
             <span>01</span>
             <div className="h-px flex-1 overflow-hidden bg-white/10">
@@ -266,7 +246,7 @@ export default function Projects() {
             <span>05</span>
           </div>
         </div>
- 
+
       </div>
     </section>
   );

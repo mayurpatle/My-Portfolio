@@ -5,7 +5,7 @@ import Reveal from "../components/Reveal";
 import Magnetic from "../components/Magnetic";
 
 /* ============================================================
-   DATA — replace the dummy content with real projects later
+   DATA
    ============================================================ */
 
 const PERSONAL_PROJECTS = [
@@ -111,7 +111,7 @@ const FREELANCE_PROJECTS = [
     metric: "8-week delivery",
     year: "2025",
     client: "Healthcare SaaS",
-    featured: true  
+    featured: true,
   },
   {
     n: "F03",
@@ -148,7 +148,7 @@ const accentMap = {
 };
 
 /* ============================================================
-   FEATURED CARD — large hero project at top of grid
+   FEATURED CARD
    ============================================================ */
 
 function FeaturedProject({ p, isFreelance }) {
@@ -184,44 +184,38 @@ function FeaturedProject({ p, isFreelance }) {
       className="group relative col-span-1 block md:col-span-2"
     >
       <div
-        className="glass relative h-full min-h-[400px] overflow-hidden rounded-3xl p-8 transition-all duration-700 ease-apple group-hover:border-white/20 md:p-12"
-        style={{ boxShadow: `0 0 0 1px transparent` }}
+        className="glass relative h-full min-h-[360px] overflow-hidden rounded-3xl p-7 transition-all duration-700 ease-apple group-hover:border-white/20 md:p-10"
       >
-        {/* Gradient mesh background */}
         <div
           className="pointer-events-none absolute inset-0 opacity-40"
-          style={{
-            background: `radial-gradient(circle at 80% 20%, ${a.glow}, transparent 60%)`,
-          }}
+          style={{ background: `radial-gradient(circle at 80% 20%, ${a.glow}, transparent 60%)` }}
         />
 
-        {/* Big watermark number */}
         <div
-          className="pointer-events-none absolute -right-8 -top-12 font-display text-[18rem] leading-none text-white/[0.03]"
+          className="pointer-events-none absolute -right-8 -top-12 font-display text-[16rem] leading-none text-white/[0.03]"
           style={{ transform: "translateZ(40px)" }}
         >
           {p.n}
         </div>
 
-        {/* Featured badge */}
-        <div className="relative mb-8 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1.5 font-mono text-[10px] uppercase tracking-widest">
+        <div className="relative mb-6 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1.5 font-mono text-[10px] uppercase tracking-widest">
           <span className={`h-1.5 w-1.5 rounded-full ${a.dot}`} />
           <span className={a.text}>Featured · {isFreelance ? "client work" : "open source"}</span>
         </div>
 
-        <div className="relative grid gap-8 md:grid-cols-2" style={{ transform: "translateZ(30px)" }}>
+        <div className="relative grid gap-6 md:grid-cols-2" style={{ transform: "translateZ(30px)" }}>
           <div>
             <p className={`font-mono text-xs tracking-widest ${a.text}`}>
               {p.n} · {p.year}
             </p>
-            <h3 className="mt-3 font-display text-5xl leading-tight tracking-tight md:text-6xl">
+            <h3 className="mt-2 font-display text-4xl leading-tight tracking-tight md:text-5xl">
               {p.title}
             </h3>
             <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.2em] text-white/40">
               {p.tag}
             </p>
             {isFreelance && p.client && (
-              <p className="mt-4 font-mono text-xs text-white/55">
+              <p className="mt-3 font-mono text-xs text-white/55">
                 client / <span className="italic-display text-white/80 font-display">{p.client}</span>
               </p>
             )}
@@ -230,8 +224,8 @@ function FeaturedProject({ p, isFreelance }) {
           <div className="flex flex-col justify-between">
             <p className="text-base leading-relaxed text-white/70">{p.blurb}</p>
 
-            <div className="mt-8">
-              <div className="mb-5 flex flex-wrap gap-2">
+            <div className="mt-6">
+              <div className="mb-4 flex flex-wrap gap-2">
                 {p.stack.map((s) => (
                   <span
                     key={s}
@@ -242,12 +236,10 @@ function FeaturedProject({ p, isFreelance }) {
                 ))}
               </div>
 
-              <div className="flex items-center justify-between border-t border-white/10 pt-5">
-                <span className="font-mono text-xs text-white/55">
-                  ↗ {p.metric}
-                </span>
-                <span className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 transition-all group-hover:border-white group-hover:bg-white group-hover:text-ink-950">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+              <div className="flex items-center justify-between border-t border-white/10 pt-4">
+                <span className="font-mono text-xs text-white/55">↗ {p.metric}</span>
+                <span className="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 transition-all group-hover:border-white group-hover:bg-white group-hover:text-ink-950">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
                     <path d="M7 17 17 7M17 7H8m9 0v9" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
                   </svg>
                 </span>
@@ -296,16 +288,15 @@ function ProjectCard({ p, isFreelance }) {
       style={{ rotateX: sx, rotateY: sy, transformStyle: "preserve-3d", transformPerspective: 1200 }}
       className="group relative block"
     >
-      <div className="glass relative h-full min-h-[380px] overflow-hidden rounded-3xl p-7 transition-all duration-700 ease-apple group-hover:border-white/20">
-        {/* Hover glow */}
+      <div className="glass relative h-full min-h-[340px] overflow-hidden rounded-3xl p-6 transition-all duration-700 ease-apple group-hover:border-white/20">
         <div
           className="pointer-events-none absolute -bottom-32 -left-20 h-72 w-72 rounded-full opacity-0 blur-3xl transition-opacity duration-700 group-hover:opacity-30"
           style={{ background: a.glow }}
         />
 
-        <div className="relative flex h-full flex-col justify-between gap-6" style={{ transform: "translateZ(20px)" }}>
+        <div className="relative flex h-full flex-col justify-between gap-5" style={{ transform: "translateZ(20px)" }}>
           <div>
-            <div className="mb-5 flex items-center justify-between">
+            <div className="mb-4 flex items-center justify-between">
               <span className={`font-mono text-xs tracking-widest ${a.text}`}>
                 {p.n} · {p.year}
               </span>
@@ -324,11 +315,11 @@ function ProjectCard({ p, isFreelance }) {
               </p>
             )}
 
-            <p className="mt-5 text-sm leading-relaxed text-white/65">{p.blurb}</p>
+            <p className="mt-4 text-sm leading-relaxed text-white/65">{p.blurb}</p>
           </div>
 
           <div>
-            <div className="mb-5 flex flex-wrap gap-2">
+            <div className="mb-4 flex flex-wrap gap-2">
               {p.stack.map((s) => (
                 <span
                   key={s}
@@ -355,13 +346,12 @@ function ProjectCard({ p, isFreelance }) {
 }
 
 /* ============================================================
-   SEGMENTED TOGGLE — Personal / Freelance
+   TOGGLE
    ============================================================ */
 
 function CategoryToggle({ category, setCategory }) {
   return (
     <div className="glass-strong relative inline-flex items-center rounded-full p-1.5">
-      {/* Sliding pill indicator */}
       <motion.div
         layout
         layoutId="toggle-pill"
@@ -403,7 +393,7 @@ function CategoryToggle({ category, setCategory }) {
 }
 
 /* ============================================================
-   STATS BAR — adapts to selected category
+   STATS BAR
    ============================================================ */
 
 function StatsBar({ category }) {
@@ -456,7 +446,8 @@ export default function Work() {
   const rest = projects.filter((p) => p.n !== featured.n);
 
   return (
-    <main className="relative z-10 min-h-screen pb-32 pt-32">
+    // TIGHTENED: pt-32 pb-32  →  pt-24 pb-20
+    <main className="relative z-10 min-h-screen pb-20 pt-24">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
 
         {/* Back link */}
@@ -473,8 +464,8 @@ export default function Work() {
           </Link>
         </Reveal>
 
-        {/* HERO */}
-        <div className="mt-12">
+        {/* HERO — TIGHTENED */}
+        <div className="mt-8">
           <Reveal>
             <p className="font-mono text-xs uppercase tracking-[0.3em] text-white/40">
               [ Work · two paths ]
@@ -482,7 +473,11 @@ export default function Work() {
           </Reveal>
 
           <Reveal delay={0.1}>
-            <h1 className="mt-6 font-display text-display-lg leading-[0.95]">
+            {/* Inline fluid font-size — caps at 4.5rem instead of 5.5rem */}
+            <h1
+              className="mt-5 font-display leading-[0.95]"
+              style={{ fontSize: "clamp(2rem, 4.5vw, 4.5rem)", letterSpacing: "-0.035em" }}
+            >
               The portfolio.
               <br />
               <span className="italic-display text-white/45">Two ways in.</span>
@@ -490,7 +485,7 @@ export default function Work() {
           </Reveal>
 
           <Reveal delay={0.25}>
-            <p className="mt-8 max-w-2xl text-base text-white/60 md:text-lg">
+            <p className="mt-6 max-w-2xl text-base text-white/60 md:text-lg">
               Open-source projects where I get to choose the architecture, and
               client work where I get to defend it.{" "}
               <span className="text-white/85">Both teach you something different.</span>
@@ -498,9 +493,9 @@ export default function Work() {
           </Reveal>
         </div>
 
-        {/* TOGGLE */}
+        {/* TOGGLE — TIGHTENED: mt-14 → mt-10 */}
         <Reveal delay={0.35}>
-          <div className="mt-14 flex flex-col items-start gap-6 md:flex-row md:items-center md:justify-between">
+          <div className="mt-10 flex flex-col items-start gap-6 md:flex-row md:items-center md:justify-between">
             <CategoryToggle category={category} setCategory={setCategory} />
 
             <AnimatePresence mode="wait">
@@ -520,8 +515,8 @@ export default function Work() {
           </div>
         </Reveal>
 
-        {/* STATS — animated when category changes */}
-        <div className="mt-14 border-y border-white/10 py-10">
+        {/* STATS — TIGHTENED: mt-14 py-10 → mt-10 py-7 */}
+        <div className="mt-10 border-y border-white/10 py-7">
           <AnimatePresence mode="wait">
             <motion.div
               key={category}
@@ -535,8 +530,8 @@ export default function Work() {
           </AnimatePresence>
         </div>
 
-        {/* PROJECTS GRID — animated swap on category change */}
-        <div className="mt-16">
+        {/* PROJECTS GRID — TIGHTENED: mt-16 → mt-12 */}
+        <div className="mt-12">
           <AnimatePresence mode="wait">
             <motion.div
               key={category}
@@ -546,10 +541,8 @@ export default function Work() {
               transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
               className="grid gap-6 md:grid-cols-2"
             >
-              {/* Featured project — spans full width */}
               <FeaturedProject p={featured} isFreelance={category === "freelance"} />
 
-              {/* Rest of projects — staggered reveal */}
               {rest.map((p, i) => (
                 <motion.div
                   key={p.n}
@@ -564,13 +557,16 @@ export default function Work() {
           </AnimatePresence>
         </div>
 
-        {/* CTA AT BOTTOM */}
+        {/* CTA — TIGHTENED: mt-32 pt-16 → mt-24 pt-12 */}
         <Reveal delay={0.2}>
-          <div className="mt-32 border-t border-white/10 pt-16 text-center">
+          <div className="mt-24 border-t border-white/10 pt-12 text-center">
             <p className="font-mono text-xs uppercase tracking-[0.3em] text-white/40">
               [ Don't see what you need? ]
             </p>
-            <h2 className="mt-6 font-display text-display-md">
+            <h2
+              className="mt-5 font-display"
+              style={{ fontSize: "clamp(1.75rem, 3.5vw, 3rem)", lineHeight: "1.05", letterSpacing: "-0.025em" }}
+            >
               {category === "personal"
                 ? <>Want to see <em className="italic-display text-white/55">how I think</em>?</>
                 : <>Want to be <em className="italic-display text-white/55">the next case study</em>?</>}
@@ -584,7 +580,7 @@ export default function Work() {
               <Magnetic>
                 <Link
                   to="/"
-                  className="inline-flex items-center gap-3 rounded-full bg-white px-6 py-3.5 text-sm font-medium text-ink-950 transition-colors hover:bg-neon-cyan"
+                  className="inline-flex items-center gap-3 rounded-full bg-white px-6 py-3 text-sm font-medium text-ink-950 transition-colors hover:bg-neon-cyan"
                 >
                   Get in touch
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
@@ -597,7 +593,7 @@ export default function Work() {
                   href="https://github.com/mayurpatle"
                   target="_blank"
                   rel="noreferrer"
-                  className="glass inline-flex items-center gap-3 rounded-full px-6 py-3.5 text-sm font-medium text-white/85 transition-colors hover:text-white"
+                  className="glass inline-flex items-center gap-3 rounded-full px-6 py-3 text-sm font-medium text-white/85 transition-colors hover:text-white"
                 >
                   Browse all repos
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
