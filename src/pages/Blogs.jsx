@@ -226,6 +226,13 @@ function FeaturedPost({ post }) {
               <p className="mt-2 text-sm leading-relaxed text-white/75">
                 {post.intuition}
               </p>
+              <br />
+              <p className="font-mono text-[10px] uppercase tracking-widest text-white/45">
+                Approach
+              </p>
+              <p className="mt-2 text-sm leading-relaxed text-white/75">
+                {post.approach}
+              </p>
             </div>
 
             <div className="font-mono text-xs">
@@ -323,9 +330,19 @@ function PostCard({ post }) {
                 {post.date}
               </span>
             </div>
-
+            <br />
+            <p className="font-mono text-[10px] uppercase tracking-widest text-white/45">
+                Intuition
+              </p>
             <p className="mt-4 text-sm leading-relaxed text-white/65">
               {post.intuition}
+            </p>
+            <br />
+            <p className="font-mono text-[10px] uppercase tracking-widest text-white/45">
+                Approach
+              </p>
+            <p className="mt-4 text-sm leading-relaxed text-white/65">
+              {post.approach}
             </p>
           </div>
 
