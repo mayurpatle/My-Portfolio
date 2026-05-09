@@ -448,7 +448,7 @@ export default function Work() {
   return (
     // TIGHTENED: pt-32 pb-32  →  pt-24 pb-20
     <main className="relative z-10 min-h-screen pb-20 pt-24">
-      <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
+      <div className="mx-auto max-w-[1200px] px-6 lg:px-12">
 
         {/* Back link */}
         <Reveal>

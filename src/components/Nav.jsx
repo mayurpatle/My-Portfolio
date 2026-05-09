@@ -10,6 +10,7 @@ export default function Nav() {
   // On any other page: all links point home with anchors.
   const links = [
     { to: "/work", label: "Work", isRoute: true },
+    { to: "/blogs", label: "Blogs", isRoute: true }, 
     { to: isHome ? "#stack"   : "/#stack",   label: "Stack",   isRoute: false },
     { to: isHome ? "#about"   : "/#about",   label: "About",   isRoute: false },
     { to: isHome ? "#contact" : "/#contact", label: "Contact", isRoute: false },
